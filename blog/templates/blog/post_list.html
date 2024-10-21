@@ -1,0 +1,7 @@
+{% extends 'parents/base.html'%}
+{% block title %}list{% endblock %}
+{% block content %}
+    {% for post in posts  %}
+        {{ post.title }}
+    {% endfor %}
+{% endblock %}>
