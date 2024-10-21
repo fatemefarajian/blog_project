@@ -1,7 +1,15 @@
 {% extends 'parents/base.html'%}
 {% block title %}list{% endblock %}
 {% block content %}
+<h1>Post List</h1>
+<ol style="--length: {{ posts.count }}" role="list">
     {% for post in posts  %}
-        {{ post.title }}
+    <li style="--i: {{ forloop.counter }}">
+       <h3>
+           <a href="{{post.get_absolute_url}}">{{ post.title }}</a>
+       </h3>
+       <p>{{ post.description | truncatewords:2 }}</p>
+    </li>
     {% endfor %}
+</ol>
 {% endblock %}>
