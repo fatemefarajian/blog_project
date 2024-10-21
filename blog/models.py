@@ -7,7 +7,7 @@ from django_jalali.db import models as jmodels
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(status=Post.status.PUBLISHED)
+        return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 
 
 class Post(models.Model):
