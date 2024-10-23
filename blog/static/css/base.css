@@ -101,3 +101,7 @@ h3::before {
 		margin-right: 1.5rem;
 	}
 }
+.pagination{
+	width: 400px;
+	margin: 0 auto;
+}

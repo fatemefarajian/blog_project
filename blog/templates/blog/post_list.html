@@ -2,7 +2,7 @@
 {% block title %}list{% endblock %}
 {% block content %}
 <h1>Post List</h1>
-<ol style="--length: {{ posts.count }}" role="list">
+<ol style="--length: {{posts|length}}" role="list">
     {% for post in posts  %}
     <li style="--i: {{ forloop.counter }}">
        <h3>
@@ -12,4 +12,5 @@
     </li>
     {% endfor %}
 </ol>
+{% include "partials/paginations.html" with page_obj=posts %}
 {% endblock %}>
