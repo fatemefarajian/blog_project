@@ -1,16 +1,20 @@
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
+from .forms import *
 
 
 def index(request):
-    return HttpResponse("INDEX")
+    return render(request, 'blog/index.html')
+
+
+def success_ticket(request):
+    return render(request, 'blog/success_ticket.html')
 
 
 def post_list(request):
     posts = Post.published.all()
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 6)
     page_number = request.GET.get('page', 1)
     try:
         posts = paginator.page(page_number)
@@ -28,4 +32,26 @@ def post_detail(request, pk):
         'post': post
     }
     return render(request, 'blog/post_detail.html', context)
+
+
+def ticket(request):
+    if request.method == 'POST':
+        form = TicketForms(request.POST)
+        if form.is_valid():
+            ticket_obj = Ticket.objects.create()
+            cd = form.cleaned_data
+            ticket_obj.name = cd['name']
+            ticket_obj.message = cd['message']
+            ticket_obj.subject = cd['subject']
+            ticket_obj.save()
+        return redirect('blog:success_ticket')
+    else:
+        form = TicketForms()
+
+    return render(request, 'forms/tickets.html', {'form': form})
+
+
+
+
+
 

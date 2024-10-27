@@ -1,0 +1,9 @@
+{% extends 'parents/base.html'%}
+{% block title %}ticket{% endblock %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value="ثبت تیکت">
+</form>
+{% endblock %}

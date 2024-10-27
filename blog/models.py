@@ -40,3 +40,20 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.id])
 
+
+class Ticket(models.Model):
+    name = models.CharField(max_length=100, verbose_name='نام')
+    message = models.TextField(verbose_name='پیام')
+    subject = models.CharField(max_length=10, verbose_name='موضوع')
+
+    class Meta:
+        ordering = ['-subject']
+        indexes = [models.Index(fields=['subject'])]
+        verbose_name = 'تیکت'
+        verbose_name_plural = 'تیکت ها'
+
+    def __str__(self):
+        return f'{self.name} : {self.subject}'
+
+
+
