@@ -44,6 +44,8 @@ class Post(models.Model):
 class Ticket(models.Model):
     name = models.CharField(max_length=100, verbose_name='نام')
     message = models.TextField(verbose_name='پیام')
+    email = models.EmailField(verbose_name='ایمیل')
+    phone = models.CharField(max_length=11, verbose_name='تلفن')
     subject = models.CharField(max_length=10, verbose_name='موضوع')
 
     class Meta:

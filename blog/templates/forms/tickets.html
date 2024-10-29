@@ -3,7 +3,27 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-    {{form.as_p}}
+   نام و نام خانوادگی:
+    <input type="text" name="name" required>
+    <br>
+       ایمیل:
+    <input type="email" name="email">
+    <br>
+       شماره تماس:
+
+    <input type="text" name="phone" minlength="11" maxlength="11" required pattern="^09\d{9}$"
+           placeholder="مثال: 09123456789" title="شماره تلفن باید با 09 شروع شود و 11 کاراکتر باشد.">
+    <br>
+    متن:
+       <textarea name="message"></textarea>
+    <br>
+    <select name="subject">
+       <option value="پیشنهاد">پیشنهادادت</option>
+        <option value="انتقاد">انتقادات</option>
+        <option value="گزارش">گزارش</option>
+
+
+    </select>
     <input type='submit' value="ثبت تیکت">
 </form>
 {% endblock %}
