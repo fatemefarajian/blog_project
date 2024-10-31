@@ -38,13 +38,13 @@ def ticket(request):
     if request.method == 'POST':
         form = TicketForms(request.POST)
         if form.is_valid():
-            ticket_obj = Ticket.objects.create()
             cd = form.cleaned_data
-            ticket_obj.name = cd['name']
-            ticket_obj.message = cd['message']
-            ticket_obj.subject = cd['subject']
-            ticket_obj.save()
-        return redirect('blog:success_ticket')
+            Ticket.objects.create(name=cd['name'],
+                                  email=cd['email'],
+                                  phone=cd['phone'],
+                                  message=cd['message'],
+                                  subject=cd['subject'])
+            return redirect('blog:success_ticket')
     else:
         form = TicketForms()
 

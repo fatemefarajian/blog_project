@@ -1,29 +1,54 @@
-{% extends 'parents/base.html'%}
+{% extends 'parent/base.html'%}
 {% block title %}ticket{% endblock %}
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
    نام و نام خانوادگی:
-    <input type="text" name="name" required>
+    <input type="text" name="name" required
+    {% if form.name.value %} value="{{form.name.value}}"{% endif %}>
     <br>
        ایمیل:
-    <input type="email" name="email">
+    <input type="email" name="email" required
+    {% if form.email.value %} value="{{form.email.value}}"{% endif %}>
     <br>
        شماره تماس:
-
-    <input type="text" name="phone" minlength="11" maxlength="11" required pattern="^09\d{9}$"
-           placeholder="مثال: 09123456789" title="شماره تلفن باید با 09 شروع شود و 11 کاراکتر باشد.">
+    <input type="text" name="phone" required
+           placeholder=" مثال: 09123456789"
+    {% if form.phone.value %} value="{{form.phone.value}}"{% endif %}>
     <br>
     متن:
-       <textarea name="message"></textarea>
+       <textarea name="message">
+           {% if form.message.value %}{{form.message.value}}{% endif %}
+       </textarea>
     <br>
     <select name="subject">
-       <option value="پیشنهاد">پیشنهادادت</option>
-        <option value="انتقاد">انتقادات</option>
-        <option value="گزارش">گزارش</option>
-
-
+        <option value="پیشنهاد"
+                {% if form.subject.value == 'پیشنهاد' %} selected {% endif %}>
+            پیشنهادات</option>
+        <option value="انتقاد"
+        {% if form.subject.value == 'انتقاد' %} selected {% endif %}>
+            انتقادات</option>
+        <option value="گزارش"
+                {% if form.subject.value == 'گزارش' %} selected {% endif %}>
+            گزارش</option>
     </select>
+        <br>
     <input type='submit' value="ثبت تیکت">
 </form>
+
+{% if form.errors %}
+لطفا خطاهای زیر را اصلاح نمایید!
+<br>
+    {%for field in form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p>{{ field.label }}:{{ error }}</p>
+            {% endfor %}
+        {% endif%}
+    {% endfor %}
+{% endif %}
+
+{% if form.non_field_errors %}
+{{form.non_field_errors}}
+{% endif %}
 {% endblock %}
