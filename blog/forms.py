@@ -1,5 +1,7 @@
 from django import forms
 
+from .models import Comment
+
 
 class TicketForms(forms.Form):
     SUBJECT_CHOICES = (
@@ -34,5 +36,15 @@ class TicketForms(forms.Form):
                 return phone
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
 
-
+    def clean_text(self):
+        text = self.cleaned_data.get('text')
+        if text:
+            if len(text) < 2:
+                raise forms.ValidationError('متن نظر نمیتواند خیلی کوتاه باشد')
+            else:
+                return text

@@ -7,4 +7,29 @@
 <p>{{post.description | linebreaks }}</p>
 <hr>
 <p>{{post.publish|jformat:"%Y/%m/%d-%H:%M" }}</p>
+
+<!--    تعیین بازه برای مفرد یا جمع بودن تعداد کامنت ها-->
+<div>
+    {% with comments.count as cm_count %}
+
+    {{ cm_count }} comment {{ cm_count | pluralize }}
+{% endwith %}
+</div>
+<h2>نظرات</h2>
+{% for cm in comments %}
+<h4>{{cm.name}}:</h4>
+<br>
+<p>{{cm.text | linebreaks }}</p>
+{% empty %}
+برای این پست نظری وجود ندارد!
+{% endfor %}
+<h4>نظر خود را وارد کنید</h4>
+
+<form action="{% url 'blog:comments' post.id %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="ثبت نظر">
+
+</form>
+
 {% endblock %}>

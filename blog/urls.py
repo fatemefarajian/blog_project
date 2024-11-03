@@ -7,7 +7,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('posts/', views.post_list, name='post_list'),
     path('posts/<int:pk>/', views.post_detail, name='post_detail'),
-    path('ticket/', views.ticket, name='ticket'),
+    path('posts/<int:post_id>/comment/', views.post_comment, name='comments'),
+    path('ticket/', views.ticket, name='tickets'),
     path('success_ticket/', views.success_ticket, name='success_ticket'),
 
 ]
