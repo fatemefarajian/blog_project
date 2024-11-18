@@ -3,7 +3,11 @@
 {% block title %}index{% endblock %}
 {% block content %}
 <h1>my home page</h1>
+<p>تعداد پست ها: {% tp %}</p>
+<p>تعداد کامنت ها:{%  tc%}</p>
+<p>{% last_post_date %}تاریخ انتشار آخرین پست : </p>
 <p>{% latest_posts %}</p>
+<p>{% show_active_users %}</p>
 <h4>محبوب ترین پست ها:</h4>
 {% popular_posts as pop_post %}
 {% for post in pop_post %}
