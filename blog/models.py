@@ -21,10 +21,11 @@ class Post(models.Model):
     title = models.CharField(max_length=200, verbose_name='عنوان')
     description = models.TextField(verbose_name='توضیحات')
     slug = models.SlugField(max_length=200, unique=True)
-    publish = jmodels.jDateTimeField(default=timezone.now,verbose_name='تاریخ انتشار')
+    publish = jmodels.jDateTimeField(default=timezone.now, verbose_name='تاریخ انتشار')
     created = jmodels.jDateTimeField(auto_now_add=True)
     updated = jmodels.jDateTimeField(auto_now=True)
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT, verbose_name='وضعیت')
+    reading_time = models.PositiveIntegerField(verbose_name='زمان مطالعه')
     objects = jmodels.jManager()
     published = PublishedManager()
 

@@ -18,7 +18,7 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ['status']
     date_hierarchy = 'publish'
     prepopulated_fields = {'slug': ['title']}
-    list_display_links = ['author']
+    list_display_links = ['title']
 
 
 @admin.register(Ticket)

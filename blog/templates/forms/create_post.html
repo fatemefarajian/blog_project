@@ -1,0 +1,22 @@
+{% extends 'parent/base.html'%}
+{% block title %}create post {% endblock %}
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="ثبت پست">
+</form>
+{% if form.errors %}
+ {%for field in form %}
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <p>{{ field.label }}:{{ error }}</p>
+            {% endfor %}
+        {% endif%}
+    {% endfor %}
+{% endif %}
+
+{% if form.non_field_errors %}
+{{form.non_field_errors}}
+{% endif %}
+{% endblock %}

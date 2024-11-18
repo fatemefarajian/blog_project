@@ -10,5 +10,6 @@ urlpatterns = [
     path('posts/<int:post_id>/comment/', views.post_comment, name='comments'),
     path('ticket/', views.ticket, name='tickets'),
     path('success_ticket/', views.success_ticket, name='success_ticket'),
+    path('create/', views.CreatePost.as_view(), name='create_post'),
 
 ]

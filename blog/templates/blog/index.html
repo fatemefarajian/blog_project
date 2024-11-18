@@ -1,6 +1,13 @@
 {% extends 'parent/base.html'%}
+{% load blog_tags %}
 {% block title %}index{% endblock %}
 {% block content %}
 <h1>my home page</h1>
-
+<p>{% latest_posts %}</p>
+<h4>محبوب ترین پست ها:</h4>
+{% popular_posts as pop_post %}
+{% for post in pop_post %}
+<a href="{{ post.get_absolute_url }}">{{post.title}} with {{post.comment_count}}</a>
+<br>
+{% endfor %}
 {% endblock %}

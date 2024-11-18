@@ -1,5 +1,6 @@
 {% extends 'parent/base.html'%}
 {% load jformat %}
+{% load blog_tags %}
 {% block title %}detail{% endblock %}
 {% block content %}
 <h1>Post Detail</h1>
@@ -19,7 +20,8 @@
 {% for cm in comments %}
 <h4>{{cm.name}}:</h4>
 <br>
-<p>{{cm.text | linebreaks }}</p>
+
+<p>{{cm.text | censor| linebreaks  }}</p>
 {% empty %}
 برای این پست نظری وجود ندارد!
 {% endfor %}

@@ -1,0 +1,16 @@
+{% extends 'parent/base.html'%}
+
+{% load blog_tags %}
+{% load jformat %}
+
+{% block title %}latest posts{% endblock %}
+{% block content %}
+<p>تعداد پست ها: {% tp %}</p>
+<p>تعداد کامنت ها:{%  tc%}</p>
+<p>{% last_post_date %}تاریخ انتشار آخرین پست : </p>
+
+<h4>آخرین پست ها</h4>
+{% for post in l_posts %}
+<p><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
+{% endfor %}
+{% endblock %}

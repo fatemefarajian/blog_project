@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
+from django.views.generic import CreateView
 
 from .models import *
 from .forms import *
@@ -68,12 +70,19 @@ def post_comment(request, post_id):
         comment.name = request.user
         comment.save()
     context = {
+
         'post': post,
         'form': form,
         'comment': comment,
     }
     return render(request, 'forms/comments.html', context)
 
+
+class CreatePost(CreateView):
+    model = Post
+    fields = ['author', 'title', 'description', 'slug', 'publish', 'status']
+    template_name = 'forms/create_post.html'
+    success_url = reverse_lazy('blog:post_list')
 
 
 
