@@ -93,6 +93,12 @@ def post_search(request):
     return render(request, 'blog/search.html', context)
 
 
+def profile(request):
+    user = request.user
+    posts = Post.published.filter(author=user)
+    return render(request, 'blog/profile.html', {'posts': posts})
+
+
 class CreatePost(CreateView):
     model = Post
     fields = ['author', 'title', 'description', 'slug', 'publish', 'status']

@@ -1,0 +1,21 @@
+{% extends 'parent/base.html'%}
+
+{% block title %}Profile{% endblock %}
+{% block content %}
+<table style="width: 80%; border: 2px solid deeppink; direction: rtl; text-align: center">
+  <tr>
+      <th>ردیف</th>
+      <th>مشاهده پست</th>
+      <th>ویرایش</th>
+      <th>حذف</th>
+  </tr>
+   {% for post in posts %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td><a href="{{post.get_absolute_url}}">{{post.title}}</a></td>
+        <td><a href="#"></a>***</td>
+        <td><a href="#"></a>***</td>
+    </tr>
+   {% endfor %}
+</table>
+{% endblock %}
