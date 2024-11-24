@@ -78,6 +78,21 @@ def post_comment(request, post_id):
     return render(request, 'forms/comments.html', context)
 
 
+def post_search(request):
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Post.published.filter(title__icontains=query)
+    context = {
+        'query': query,
+        'results': results,
+    }
+    return render(request, 'blog/search.html', context)
+
+
 class CreatePost(CreateView):
     model = Post
     fields = ['author', 'title', 'description', 'slug', 'publish', 'status']

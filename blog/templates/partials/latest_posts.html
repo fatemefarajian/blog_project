@@ -1,14 +1,10 @@
-{% extends 'parent/base.html'%}
-
+{% load static %}
 {% load blog_tags %}
 {% load jformat %}
 
-{% block title %}latest posts{% endblock %}
-{% block content %}
 
 
 <h4>آخرین پست ها</h4>
 {% for post in l_posts %}
 <p><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
 {% endfor %}
-{% endblock %}

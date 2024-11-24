@@ -6,6 +6,20 @@
 <p>تعداد پست ها: {% tp %}</p>
 <p>تعداد کامنت ها:{%  tc%}</p>
 <p>{% last_post_date %}تاریخ انتشار آخرین پست : </p>
+ {% max_reading_post as mp %}
+{% if mp %}
+<p>بیشترین زمان مطالعه برای پست :</p>
+<p><a href="{{ mp.get_absolute_url }}">{{mp.title}}: {{mp.reading_time}}دقیقه</a></p>
+{% else %}
+<p>هیچ پستی وجود ندارد</p>
+{% endif %}
+{% min_reading_post as mr %}
+{% if mr %}
+<p>کمترین زمان مطالعه برای پست :</p>
+<p><a href="{{ mr.get_absolute_url }}">{{mr.title}}: {{mr.reading_time}}دقیقه</a></p>
+{% else %}
+<p>هیچ پستی وجود ندارد</p>
+{% endif %}
 <p>{% latest_posts %}</p>
 <p>{% show_active_users %}</p>
 <h4>محبوب ترین پست ها:</h4>

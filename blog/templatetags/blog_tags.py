@@ -1,6 +1,6 @@
 from django import template
 from django.contrib.auth.models import User
-from django.db.models import Count
+from django.db.models import Count, Max
 
 from ..models import Post, Comment
 
@@ -34,6 +34,18 @@ def censor(text):
         if word in text:
             text = text.replace(word, '*' * len(word))
     return text
+
+
+@register.simple_tag()
+def max_reading_post():
+    max_reading = Post.published.aggregate(Max('reading_time'))
+    post_mr = Post.published.filter(reading_time=max_reading['reading_time__max']).first()
+    return post_mr
+
+
+@register.simple_tag()
+def min_reading_post():
+    return Post.published.order_by('reading_time').first()
 
 
 @register.inclusion_tag('partials/latest_posts.html')

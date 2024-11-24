@@ -1,11 +1,6 @@
-{% extends 'parent/base.html'%}
-
+{% load static %}
 {% load blog_tags %}
 {% load jformat %}
-
-{% block title %}active users{% endblock %}
-{% block content %}
-
 
 <h4>فعال ترین کاربران</h4>
 <ul>
@@ -15,4 +10,3 @@
         <li>No active users found.</li>
     {% endfor %}
 </ul>
-{% endblock %}

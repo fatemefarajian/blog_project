@@ -48,3 +48,7 @@ class CommentForm(forms.ModelForm):
                 raise forms.ValidationError('متن نظر نمیتواند خیلی کوتاه باشد')
             else:
                 return text
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField(max_length=100)
