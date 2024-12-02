@@ -3,6 +3,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.views.generic import CreateView
+from django.db.models import Q
+from django.contrib.postgres.search import SearchVector, TrigramSimilarity
 
 from .models import *
 from .forms import *
@@ -85,7 +87,16 @@ def post_search(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
-            results = Post.published.filter(title__icontains=query)
+            results1 = Post.published.annotate(similarity=TrigramSimilarity('title', query)) \
+                .filter(similarity__gt=0.1)
+            results2 = Post.published.annotate(similarity=TrigramSimilarity('description', query)) \
+                .filter(similarity__gt=0.1)
+            results = (results1 | results2).order_by('-similarity')
+            # results = (Post.published.annotate(search=SearchVector('title', 'description'))
+            #            .filter(search=query))
+            # results = Post.published.filter(Q(title__search=query) | Q(description__search=query))
+
+
     context = {
         'query': query,
         'results': results,
