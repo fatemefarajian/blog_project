@@ -34,3 +34,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_editable = ['active']
     date_hierarchy = 'created'
 
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['post', 'created', 'title']
+

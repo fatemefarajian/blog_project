@@ -9,6 +9,9 @@
 <p>{{post.reading_time}}' : زمان مطالعه</p>
 <hr>
 <p>{{post.publish|jformat:"%Y/%m/%d-%H:%M" }}</p>
+{% for image in post.images.all %}
+<img src="{{image.image_file.url}}" alt="{{image.title}}" style="width: 150px; height: 200px">
+{% endfor %}
 
 
 <!--    تعیین بازه برای مفرد یا جمع بودن تعداد کامنت ها-->
