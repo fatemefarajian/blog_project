@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from django_jalali.db import models as jmodels
+from django.template.defaultfilters import slugify
 
 
 class PublishedManager(models.Manager):
@@ -40,6 +41,17 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.id])
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        for img in self.images.all():
+            storage, path = img.image_file.storage, img.image_file.path
+            storage.delete(path)
+        super().delete(*args, **kwargs)
 
 
 class Ticket(models.Model):
@@ -91,6 +103,6 @@ class Image(models.Model):
         verbose_name_plural = ' تصویر ها'
 
     def __str__(self):
-        return self.title
+        return self.title if self.title else 'None'
 
 

@@ -2,6 +2,9 @@
 
 {% block title %}Profile{% endblock %}
 {% block content %}
+<p><a href="{% url 'blog:create_post'%}"> ایجاد پست جدید</a></p>
+<br>
+
 <table style="width: 80%; border: 2px solid deeppink; direction: rtl; text-align: center">
   <tr>
       <th>ردیف</th>
@@ -14,7 +17,7 @@
         <td>{{ forloop.counter }}</td>
         <td><a href="{{post.get_absolute_url}}">{{post.title}}</a></td>
         <td><a href="#"></a>***</td>
-        <td><a href="#"></a>***</td>
+        <td><a href="{% url 'blog:delete_post' post.id %}">حذف پست</a></td>
     </tr>
    {% endfor %}
 </table>
