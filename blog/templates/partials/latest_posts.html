@@ -4,7 +4,12 @@
 
 
 
-<h4>آخرین پست ها</h4>
-{% for post in l_posts %}
-<p><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
+<h4 style="text-align: center; color: blueviolet; font-size: 40px">آخرین پست ها</h4>
+<ul>
+    {% for post in l_posts %}
+    <li>
+        <p><a href="{{ post.get_absolute_url }}">{{post.title}}</a></p>
+    </li>
+
 {% endfor %}
+</ul>

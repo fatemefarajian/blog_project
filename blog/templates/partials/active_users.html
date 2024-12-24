@@ -2,7 +2,7 @@
 {% load blog_tags %}
 {% load jformat %}
 
-<h4>فعال ترین کاربران</h4>
+<h4 style="text-align: center ; color: #d520a0; font-size: 40px">فعال ترین کاربران</h4>
 <ul>
     {% for user in active_users %}
         <li>{{ user.username }} - {{ user.post_count }} posts</li>

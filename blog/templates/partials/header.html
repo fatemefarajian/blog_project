@@ -2,5 +2,13 @@
     <input type="text" name="query" placeholder="کلمه ی مورد نظر خود را وارد کنید" required>
     <input type="submit" value="جست و جو">
 </form>
-<p><a href="{% url 'blog:profile' %}"> پروفایل</a></p>
-<br>
+{% if request.user.is_authenticated %}
+<h2>{{request.user.first_name | default:request.user.username}}</h2><br>
+<p style="border: #d520a0 solid 2px; width: 100px; text-align: center">
+    <a href="{% url 'blog:profile' %}"> پروفایل</a></p>
+{% else %}
+<form action="{% url 'blog:login' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">ورود</button>
+</form>
+{% endif %}

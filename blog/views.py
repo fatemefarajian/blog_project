@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse_lazy
@@ -5,6 +6,8 @@ from django.views.decorators.http import require_POST
 from django.views.generic import CreateView
 from django.db.models import Q
 from django.contrib.postgres.search import SearchVector, TrigramSimilarity
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 from .models import *
 from .forms import *
@@ -44,6 +47,7 @@ def post_detail(request, pk):
     return render(request, "blog/post_detail.html", context)
 
 
+@login_required
 def ticket(request):
     if request.method == 'POST':
         form = TicketForms(request.POST)
@@ -87,19 +91,16 @@ def post_search(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
-            result1 = Post.published.annotate(similarity=TrigramSimilarity('title', query)) \
-                .filter(similarity__gt=0.1)
-            result2 = Post.published.annotate(similarity=TrigramSimilarity('description', query)) \
-                .filter(similarity__gt=0.1)
-            result3 = Image.objects.annotate(similarity=TrigramSimilarity('title', query)) \
-                .filter(similarity__gt=0.1)
-            result4 = Image.objects.annotate(similarity=TrigramSimilarity('description', query)) \
-                .filter(similarity__gt=0.1)
+            result1 = (Post.published.annotate(
+                similarity=TrigramSimilarity('title', query) +
+                           TrigramSimilarity('description', query))
+                       .filter(similarity__gt=0.1)).values('title', 'similarity')
+            result2 = (Image.objects.annotate(
+                similarity=TrigramSimilarity('title', query) +
+                           TrigramSimilarity('description', query))
+                       .filter(similarity__gt=0.1).values('title', 'similarity'))
 
-            results = (result1 | result2 | result3 | result4).order_by('-similarity')
-            # results = (Post.published.annotate(search=SearchVector('title', 'description'))
-            #            .filter(search=query))
-            # results = Post.published.filter(Q(title__search=query) | Q(description__search=query))
+            results = (result1.union(result2)).order_by('-similarity')
 
     context = {
         'query': query,
@@ -108,11 +109,14 @@ def post_search(request):
     return render(request, 'blog/search.html', context)
 
 
+@login_required
 def profile(request):
     user = request.user
     posts = Post.published.filter(author=user)
     return render(request, 'blog/profile.html', {'posts': posts})
 
+
+@login_required
 def create_post(request):
     if request.method == 'POST':
         form = CreatePostForm(request.POST, request.FILES)
@@ -128,6 +132,7 @@ def create_post(request):
     return render(request, 'forms/create_post.html', {'form': form})
 
 
+@login_required
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == 'POST':
@@ -137,11 +142,31 @@ def delete_post(request, post_id):
     return render(request, 'forms/delete_post.html', {'post': post})
 
 
+@login_required
+def delete_image(request, img_id):
+    image = get_object_or_404(Image, id=img_id)
+    image.delete()
+    return redirect('blog:profile')
 
 
+@login_required
+def edit_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            Image.objects.create(image_file=form.cleaned_data['image1'], post=post)
+            Image.objects.create(image_file=form.cleaned_data['image2'], post=post)
+            return redirect('blog:profile')
+    else:
+        form = CreatePostForm(instance=post)
+
+    return render(request, 'forms/create_post.html', {'form': form, 'post': post})
 
 
-
-
-
-
+def log_out(request):
+    logout(request)
+    return redirect(request.META.get('HTTP_REFERER'))
