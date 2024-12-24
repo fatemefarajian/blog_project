@@ -11,4 +11,9 @@
     {% csrf_token %}
     <button type="submit">ورود</button>
 </form>
+<form action="{% url 'blog:password_reset' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">بازنشانی رمز</button>
+
+</form>
 {% endif %}
