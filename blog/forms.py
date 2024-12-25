@@ -1,7 +1,7 @@
 from django import forms
 
 from . import models
-from .models import Comment, Post, User
+from .models import Comment, Post, User, Account
 
 
 class TicketForms(forms.Form):
@@ -79,3 +79,14 @@ class UserRegistrationForm(forms.ModelForm):
         else:
             return cd['password2']
 
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+
+class AccountEditForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ['photo', 'date_of_birth', 'job', 'bio']

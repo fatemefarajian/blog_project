@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django_jalali.db import models as jmodels
 from django.template.defaultfilters import slugify
+from django_resized import ResizedImageField
 
 
 class PublishedManager(models.Manager):
@@ -91,7 +92,7 @@ class Comment(models.Model):
 
 class Image(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='images', verbose_name='تصویر')
-    image_file = models.ImageField(upload_to='post_image/')
+    image_file = ResizedImageField(upload_to="post_images/", size=[600, 400], quality=100, crop=['middle', 'center'])
     title = models.CharField(max_length=200, verbose_name='عنوان', null=True, blank=True)
     description = models.TextField(verbose_name='توضیحات', null=True, blank=True)
     created = jmodels.jDateTimeField(auto_now_add=True)
@@ -109,5 +110,23 @@ class Image(models.Model):
 
     def __str__(self):
         return self.title if self.title else 'None'
+
+
+class Account(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='account')
+    photo = ResizedImageField(verbose_name="تصویر پروفایل", upload_to="account_images/", size=[500, 500],
+                              quality=60, crop=['middle', 'center'], blank=True, null=True)
+    date_of_birth = jmodels.jDateField(null=True, blank=True, verbose_name='تاریخ تولد')
+    bio = models.TextField(null=True, blank=True, verbose_name='بیوگرافی')
+    job = models.CharField(max_length=100, null=True, blank=True, verbose_name='شغل')
+
+    class Meta:
+        verbose_name = 'اکانت'
+        verbose_name_plural = ' اکانت ها'
+
+    def __str__(self):
+        return self.user.username
+
+
 
 

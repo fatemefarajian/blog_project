@@ -52,3 +52,9 @@ class CommentAdmin(admin.ModelAdmin):
 class ImageAdmin(admin.ModelAdmin):
     list_display = ['post', 'created', 'title']
 
+
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ['user', 'photo','date_of_birth', 'bio', 'job']
+
+
