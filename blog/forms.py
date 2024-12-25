@@ -1,7 +1,7 @@
 from django import forms
 
 from . import models
-from .models import Comment, Post
+from .models import Comment, Post, User
 
 
 class TicketForms(forms.Form):
@@ -64,4 +64,18 @@ class CreatePostForm(forms.ModelForm):
         fields = ['title', 'description', 'reading_time']
 
 
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(max_length=20, widget=forms.PasswordInput, label='رمز')
+    password2 = forms.CharField(max_length=20, widget=forms.PasswordInput, label='تکرار رمز')
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('پسوررد ها مطابقت ندارند')
+        else:
+            return cd['password2']
 

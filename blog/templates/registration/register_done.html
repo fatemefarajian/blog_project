@@ -1,0 +1,8 @@
+{% extends 'parent/base.html'%}
+
+{% block title %}Register Done{% endblock %}
+{% block content %}
+<h2>  عزیز {{user}}</h2>
+<p style="color: forestgreen">ثبت نام شما با موفقیت انجام شد</p>
+<a href="{% url 'blog:login' %}">جهت ورود اینجا کلیک کنید...</a>
+{% endblock %}

@@ -1,19 +1,32 @@
-<form action="{% url 'blog:post_search' %}" method="get">
+<!DOCTYPE html>
+{% load static %}
+<html lang="fa" >
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {% block head %}{% endblock %}
+</head>
+<header class="header">
+
+<!-- فرم جستجو -->
+<form action="{% url 'blog:post_search' %}" method="get" class="search-form">
     <input type="text" name="query" placeholder="کلمه ی مورد نظر خود را وارد کنید" required>
     <input type="submit" value="جست و جو">
 </form>
+
+<!-- دکمه‌های ورود، ثبت‌نام، پروفایل و تغییر رمز -->
+<div>
+
 {% if request.user.is_authenticated %}
 <h2>{{request.user.first_name | default:request.user.username}}</h2><br>
-<p style="border: #d520a0 solid 2px; width: 100px; text-align: center">
-    <a href="{% url 'blog:profile' %}"> پروفایل</a></p>
-{% else %}
-<form action="{% url 'blog:login' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">ورود</button>
-</form>
-<form action="{% url 'blog:password_reset' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">بازنشانی رمز</button>
-
-</form>
+        <a href="{% url 'blog:profile' %}" class="button profile">پروفایل</a>
+    {% else %}
+    <a href="{% url 'blog:login' %}" class="button login">ورود</a>
+    <a href="{% url 'blog:register' %}" class="button register">ثبت نام</a>
+    <a href="{% url 'blog:password_reset' %}" class="reset-link">آیا رمز خود را فراموش کرده‌اید؟</a>
 {% endif %}
+</div>
+</header>
+</html>

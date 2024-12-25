@@ -2,14 +2,8 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
-<form action="{% url 'blog:logout'%}" method="post">
-    {% csrf_token %}
-        <button type="submit" style="border: red solid 2px; text-align: center; width: 100px">خروج</button>
-    </form>
-<form action="{% url 'blog:password_change' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" style="border: red solid 2px; text-align: center; width: 100px">تغییر رمز </button>
-</form>
+<a href="{% url 'blog:logout'%}" class="button logout">خروج</a>
+<a href="{% url 'blog:password_change' %}" class="button change-password">تغییر رمز</a>
 {% endif %}
 <p><a href="{% url 'blog:create_post'%}"> ایجاد پست جدید</a></p>
 <br>

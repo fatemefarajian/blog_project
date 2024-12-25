@@ -3,6 +3,12 @@
 * {
 	box-sizing: border-box;
 }
+.header {
+    display: flex; /* نمایش به صورت خطی */
+    align-items: center; /* تراز کردن عمودی */
+    justify-content: flex-start; /* تراز کردن همه چیز به سمت چپ */
+    padding: 20px; /* فاصله داخلی */
+}
 
 body {
 	--h: 212deg;
@@ -11,6 +17,72 @@ body {
 	font-family: Montserrat, sans-serif;
 	margin: 0;
 	background-color: whitesmoke;
+	direction: rtl; /* تنظیم راست به چپ برای کل صفحه */
+    text-align: right; /* تراز متن به سمت راست */
+}
+
+.button {
+    display: inline-block; /* نمایش inline برای دکمه‌ها */
+    padding: 10px 15px; /* فاصله داخلی */
+    text-align: center; /* تراز کردن متن داخل دکمه */
+    border: 2px solid #007bff; /* رنگ و ضخامت مرز */
+    border-radius: 5px; /* گوشه‌های گرد */
+    background-color: white; /* رنگ پس‌زمینه */
+    color: black; /* رنگ متن */
+    margin-left: 10px; /* فاصله بین دکمه‌ها */
+    text-decoration: none; /* حذف زیرخط */
+}
+
+.button:hover {
+    background-color: #0056b3; /* تغییر رنگ پس‌زمینه در هاور */
+    border-color: #0056b3; /* رنگ مرز در هاور */
+}
+/* استایل دکمه‌ها با رنگ‌های مختلف */
+.register {
+    border-color: #28a745; /* رنگ مرز دکمه ثبت نام */
+    color: #28a745; /* رنگ متن دکمه ثبت نام */
+}
+
+.login {
+    border-color: #007bff; /* رنگ مرز دکمه ورود */
+    color: #007bff; /* رنگ متن دکمه ورود */
+}
+
+.logout {
+    border-color: #dc3545; /* رنگ مرز دکمه خروج */
+    color: #dc3545; /* رنگ متن دکمه خروج */
+}
+
+/* استایل هنگام هاور */
+
+.register:hover {
+    background-color: #28a745; /* رنگ پس‌زمینه دکمه ثبت نام هنگام هاور */
+    color: white; /* رنگ متن دکمه ثبت نام هنگام هاور */
+}
+
+.login:hover {
+    background-color: #007bff; /* رنگ پس‌زمینه دکمه ورود هنگام هاور */
+    color: white; /* رنگ متن دکمه ورود هنگام هاور */
+}
+
+.logout:hover {
+    background-color: #dc3545; /* رنگ پس‌زمینه دکمه خروج هنگام هاور */
+    color: white; /* رنگ متن دکمه خروج هنگام هاور */
+}
+.button.profile {
+    background-color: #28a745; /* رنگ پس‌زمینه دکمه پروفایل */
+}
+
+.button.profile:hover {
+    background-color: #218838; /* رنگ هاور دکمه پروفایل */
+}
+
+.button.change-password {
+    background-color: #dc3545; /* رنگ پس‌زمینه دکمه تغییر رمز */
+}
+
+.button.change-password:hover {
+    background-color: #c82333; /* رنگ هاور دکمه تغییر رمز */
 }
 h1{
 	width: 350px;
@@ -104,4 +176,76 @@ h3::before {
 .pagination{
 	width: 400px;
 	margin: 0 auto;
+}
+input[type="text"],
+input[type="submit"] {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+.reset-link {
+    display: inline-block; /* نمایش به صورت بلوک خطی */
+    padding: 10px 15px; /* فاصله داخلی */
+    margin: 10px 0; /* فاصله عمودی */
+    border: 2px solid transparent; /* مرز شفاف موقتی */
+    border-radius: 5px; /* گوشه‌های گرد */
+    background-color: #007bff; /* رنگ پس‌زمینه */
+    color: white; /* رنگ متن */
+    text-decoration: none; /* عدم زیرخط */
+    font-size: 16px; /* اندازه نوشته */
+    transition: background-color 0.3s, color 0.3s; /* انیمیشن */
+}
+
+/* استایل هنگام هاور */
+.reset-link:hover {
+    background-color: #0056b3; /* رنگ پس‌زمینه در هاور */
+}
+
+.search-form {
+    display: flex; /* نمایش به صورت خطی */
+    align-items: center; /* تراز کردن عمودی */
+    justify-content: flex-start; /* تراز کردن افقی در سمت چپ */
+    margin: 20px; /* فاصله از بالا و پایین */
+    position: absolute; /* موقعیت فرم */
+    top: 20px; /* فاصله از بالا */
+    left: 20px; /* فاصله از سمت چپ */
+    z-index: 100; /* اطمینان از اینکه فرم بالای سایر عناصر قرار بگیرد */
+}
+
+.search-form input[type="text"] {
+    padding: 10px; /* فاصله داخلی */
+    border: 2px solid #ccc; /* رنگ و ضخامت مرز */
+    border-radius: 5px; /* گوشه‌های گرد */
+    font-size: 12px; /* اندازه متن */
+    width: 220px; /* عرض ورودی */
+    outline: none; /* حذف حاشیه پیش‌فرض */
+    transition: border-color 0.3s; /* انیمیشن تغییر رنگ مرز */
+    background-image: url('https://cdn-icons-png.flaticon.com/512/622/622669.png'); /* لینک آیکون */
+    background-repeat: no-repeat; /* عدم تکرار تصویر */
+    background-position: 10px center; /* موقعیت آیکون */
+    background-size: 20px; /* اندازه آیکون */
+    padding-left: 40px; /* فاصله از سمت چپ تا آیکون */
+}
+
+.search-form input[type="text"]:focus {
+    border-color: #007bff; /* رنگ مرز هنگام فوکوس */
+}
+
+.search-form input[type="submit"] {
+    padding: 10px 15px; /* فاصله داخلی */
+    border: 2px solid #007bff; /* رنگ و ضخامت مرز */
+    background-color: #fff; /* رنگ پس‌زمینه سفید */
+    color: #007bff; /* رنگ متن آبی */
+    border-radius: 5px; /* گوشه‌های گرد */
+    cursor: pointer; /* تغییر نشانگر موس */
+    transition: background-color 0.3s, border-color 0.3s; /* انیمیشن */
+    margin-left: 10px; /* فاصله از کادر جستجو */
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #007bff; /* تغییر رنگ پس‌زمینه در هاور */
+    color: white; /* تغییر رنگ متن در هاور */
+    border-color: #0056b3; /* رنگ مرز در هاور */
 }
