@@ -1,14 +1,15 @@
-{% extends 'parent/base.html'%}
+{% extends 'parent/base.html' %}
 
 {% block title %}Search{% endblock %}
 {% block content %}
 {% if query %}
-<p>{{query}}نتایج جست و جو برای :</p>
-<p>{{results.count}}</p>
+<p>نتایج جست و جو برای "{{ query }}":</p>
+<p style="color: #d520a0">{{ results.count }} عدد</p>
 {% endif %}
 {% for post in results %}
-<p><a href="{{post.get_absolute_url}}">{{post.title}}</a></p>
+<!-- به روز رسانی برای دسترسی به دیکشنری -->
+<p><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></p>
 {% empty %}
-<p>هیچ نتیجه ای یافت نشد</p>
+<p>هیچ نتیجه‌ای یافت نشد</p>
 {% endfor %}
 {% endblock %}

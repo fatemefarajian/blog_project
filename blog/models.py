@@ -19,15 +19,31 @@ class Post(models.Model):
         PUBLISHED = 'PB', 'Published'
         REJECTED = 'RJ', 'Rejected'
 
+
+
+    CATEGORY_CHOICES = (
+        ('تکنولوژی', 'تکنولوی'),
+        ('زبان برنامه نویسی', 'زبان برنامه نویسی'),
+        ('هوش مصنوعی', 'هوش مصنوعی'),
+        ('بلاکچین', 'بلاکچین'),
+        ('سایر', 'سایر'),
+    )
+
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_posts', verbose_name='نویسنده')
     title = models.CharField(max_length=200, verbose_name='عنوان')
     description = models.TextField(verbose_name='توضیحات')
     slug = models.SlugField(max_length=200, unique=True)
-    publish = jmodels.jDateTimeField(default=timezone.now, verbose_name='تاریخ انتشار')
+    # date
+    publish = jmodels.jDateTimeField(default=timezone.now, verbose_name="تاریخ انتشار")
     created = jmodels.jDateTimeField(auto_now_add=True)
     updated = jmodels.jDateTimeField(auto_now=True)
-    status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT, verbose_name='وضعیت')
-    reading_time = models.PositiveIntegerField(verbose_name='زمان مطالعه')
+
+    # choice fields
+    status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT, verbose_name="وضعیت")
+    reading_time = models.PositiveIntegerField(verbose_name="زمان مطالعه")
+    category = models.CharField(verbose_name="دسته بندی", max_length=20, choices=CATEGORY_CHOICES, default='سایر')
+
+    # objects = models.Manager()
     objects = jmodels.jManager()
     published = PublishedManager()
 

@@ -11,16 +11,24 @@
 <header class="header">
 
 <!-- فرم جستجو -->
+    <div>
 <form action="{% url 'blog:post_search' %}" method="get" class="search-form">
     <input type="text" name="query" placeholder="کلمه ی مورد نظر خود را وارد کنید" required>
     <input type="submit" value="جست و جو">
 </form>
+    </div>
 
 <!-- دکمه‌های ورود، ثبت‌نام، پروفایل و تغییر رمز -->
 <div>
 
-{% if request.user.is_authenticated %}
-<h2>{{request.user.first_name | default:request.user.username}}</h2><br>
+
+    <div class="user-info">
+        {% if user.is_authenticated %}
+            <span class="username">سلام، {{request.user.first_name | default:request.user.username}}!</span>
+
+    </div>
+    <br>
+    <br>
         <a href="{% url 'blog:profile' %}" class="button profile">پروفایل</a>
     {% else %}
     <a href="{% url 'blog:login' %}" class="button login">ورود</a>

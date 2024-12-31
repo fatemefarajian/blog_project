@@ -7,9 +7,38 @@
     display: flex; /* نمایش به صورت خطی */
     align-items: center; /* تراز کردن عمودی */
     justify-content: flex-start; /* تراز کردن همه چیز به سمت چپ */
-    padding: 20px; /* فاصله داخلی */
+    padding: 20px 40px; /* افزودن فاصله داخلی بیشتر */
+    background-color: #fff; /* رنگ پس‌زمینه هدر */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* سایه برای عمق دادن به هدر */
 }
 
+.header .button {
+    /* برای دکمه‌های هدر */
+    font-size: 16px; /* اندازه نوشته بزرگتر */
+}
+
+.user-info {
+    font-size: 1.2rem; /* اندازه فونت بزرگتر */
+    color: #333; /* رنگ متن */
+    font-weight: bold; /* ضخامت متن */
+}
+
+.username {
+    color: #007bff; /* رنگ نام کاربر */
+    margin-right: 15px; /* فاصله از دکمه‌ها */
+    padding: 10px; /* حاشیه داخل */
+    border-radius: 5px; /* گوشه‌های گرد */
+    background-color: rgba(0, 123, 255, 0.1); /* پس‌زمینه ملایم */
+    transition: background-color 0.3s; /* انیمیشن انتقال رنگ */
+}
+
+.username:hover {
+    background-color: rgba(0, 123, 255, 0.2); /* تغییر رنگ در هاور */
+}
+
+.header-buttons .button {
+    margin-left: 10px; /* فاصله بین دکمه‌ها */
+}
 body {
 	--h: 212deg;
 	--l: 43%;
@@ -48,9 +77,19 @@ body {
     color: #007bff; /* رنگ متن دکمه ورود */
 }
 
+.login:hover {
+    background-color: #007bff; /* رنگ پس‌زمینه دکمه ورود هنگام هاور */
+    color: white; /* رنگ متن دکمه ورود هنگام هاور */
+}
+
 .logout {
     border-color: #dc3545; /* رنگ مرز دکمه خروج */
     color: #dc3545; /* رنگ متن دکمه خروج */
+}
+
+.logout:hover {
+    background-color: #dc3545; /* رنگ پس‌زمینه دکمه خروج هنگام هاور */
+    color: white; /* رنگ متن دکمه خروج هنگام هاور */
 }
 
 /* استایل هنگام هاور */
@@ -60,36 +99,123 @@ body {
     color: white; /* رنگ متن دکمه ثبت نام هنگام هاور */
 }
 
-.login:hover {
-    background-color: #007bff; /* رنگ پس‌زمینه دکمه ورود هنگام هاور */
-    color: white; /* رنگ متن دکمه ورود هنگام هاور */
-}
-
-.logout:hover {
-    background-color: #dc3545; /* رنگ پس‌زمینه دکمه خروج هنگام هاور */
-    color: white; /* رنگ متن دکمه خروج هنگام هاور */
-}
 .button.profile {
-    background-color: #28a745; /* رنگ پس‌زمینه دکمه پروفایل */
+    background-color: #d520a0; /* رنگ پس‌زمینه دکمه پروفایل */
+    color: white;
 }
 
 .button.profile:hover {
-    background-color: #218838; /* رنگ هاور دکمه پروفایل */
+    background-color: deeppink; /* رنگ هاور دکمه پروفایل */
 }
 
 .button.change-password {
-    background-color: #dc3545; /* رنگ پس‌زمینه دکمه تغییر رمز */
+    background-color: #d520a0; /* رنگ پس‌زمینه دکمه تغییر رمز */
+    color: white;
 }
 
 .button.change-password:hover {
-    background-color: #c82333; /* رنگ هاور دکمه تغییر رمز */
+    background-color: deeppink; /* رنگ هاور دکمه تغییر رمز */
+}
+
+
+div {
+    margin-bottom: 10px; /* فاصله پایین */
+}
+
+/* استایل برای لینک‌های دسته بندی */
+div a {
+    text-decoration: none; /* خط زیر لینک نداشته باشد */0
+    text-align: center;
+    color: #007bff; /* رنگ لینک */
+    padding: 6px 12px; /* فاصله داخلی */
+    border: 1px solid #007bff; /* مرز رنگ لینک */
+    border-radius: 5px; /* گوشه‌های گرد */
+    transition: background-color 0.3s, color 0.3s; /* انیمیشن انتقال */
+    display: inline-block; /* نمایش به صورت بلوک در خط */
+}
+
+div a:hover {
+    background-color: #007bff; /* پس‌زمینه رنگ هنگام هاور */
+    color: white; /* رنگ متن هنگام هاور */
+}
+
+/* استایل برای دکمه "مشاهده همه" */
+a u {
+    font-weight: bold; /* ضخیم‌تر کردن متن */
+    color: #007bff; /* رنگ پررنگ */
+}
+/* استایل کلی بخش لیست پست‌ها */
+.post-list {
+    list-style-type: none; /* حذف علامت لیست به صورت پیش‌فرض */
+    padding: 0; /* حذف فاصله داخلی */
+    margin: 20px 0; /* فاصله بالایی و پایینی */
+}
+
+/* استایل برای هر پست */
+.post-item {
+    border: 1px solid #e0e0e0; /* مرز دور هر پست */
+    border-radius: 8px; /* گوشه‌های گرد */
+    padding: 16px; /* فاصله داخلی */
+    margin-bottom: 20px; /* فاصله بین هر پست */
+    background-color: #f9f9f9; /* پس‌زمینه ملایم */
+    transition: box-shadow 0.3s; /* انیمیشن تغییر سایه */
+}
+
+.post-item:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* افزودن سایه در هاور */
+}
+
+/* استایل برای تصاویر */
+.post-image {
+    width: 100%; /* عرض 100% برای تصاویر */
+    max-width: 300px; /* حداکثر عرض */
+    height: auto; /* حفظ نسبت تصویر */
+    border-radius: 5px; /* گوشه‌های گرد برای تصاویر */
+}
+
+/* استایل عنوان پست */
+.post-title {
+    margin: 10px 0; /* فاصله بالا و پایین */
+}
+
+/* استایل دسته‌بندی */
+.category-section h4 {
+    margin-top: 30px; /* فاصله بالای عنوان دسته بندی */
+    font-size: 1.5rem; /* اندازه فونت بزرگتر */
+    color: #333; /* رنگ متن */
+}
+
+.category-item {
+    margin-bottom: 10px; /* فاصله پایین */
+}
+
+/* استایل برای لینک‌های دسته بندی */
+.category-item a {
+    text-decoration: none; /* خط زیر لینک نداشته باشد */
+    color: #007bff; /* رنگ لینک */
+    padding: 6px 12px; /* فاصله داخلی */
+    border: 1px solid #007bff; /* مرز رنگ لینک */
+    border-radius: 5px; /* گوشه‌های گرد */
+    transition: background-color 0.3s, color 0.3s; /* انیمیشن انتقال */
+    display: inline-block; /* نمایش به صورت بلوک در خط */
+}
+
+.category-item a:hover {
+    background-color: #007bff; /* پس‌زمینه رنگ هنگام هاور */
+    color: white; /* رنگ متن هنگام هاور */
+}
+
+/* استایل برای دکمه "مشاهده همه" */
+.view-all a {
+    font-weight: bold; /* ضخیم‌تر کردن متن */
+    color: white; /* رنگ پررنگ */
 }
 h1{
 	width: 350px;
 	height: 70px;
-	background-color: #d520a0;
-	color: #554848;
-	border-bottom: #b36eb0 solid 10px;
+	background-color: hotpink;
+	color: white;
+	border-bottom: deeppink solid 10px;
 	border-radius: 10px;
 	text-align: center;
 	margin: 20px auto;
@@ -207,9 +333,9 @@ input[type="submit"] {
     display: flex; /* نمایش به صورت خطی */
     align-items: center; /* تراز کردن عمودی */
     justify-content: flex-start; /* تراز کردن افقی در سمت چپ */
-    margin: 20px; /* فاصله از بالا و پایین */
+    margin: 10px; /* فاصله از بالا و پایین */
     position: absolute; /* موقعیت فرم */
-    top: 20px; /* فاصله از بالا */
+    top: 10px; /* فاصله از بالا */
     left: 20px; /* فاصله از سمت چپ */
     z-index: 100; /* اطمینان از اینکه فرم بالای سایر عناصر قرار بگیرد */
 }
@@ -248,4 +374,52 @@ input[type="submit"] {
     background-color: #007bff; /* تغییر رنگ پس‌زمینه در هاور */
     color: white; /* تغییر رنگ متن در هاور */
     border-color: #0056b3; /* رنگ مرز در هاور */
+}
+.profile-container {
+    width: 90%; /* تنظیم عرض کل صفحه */
+    max-width: 1200px; /* حداکثر عرض */
+    margin: 0 auto; /* مرکز قرار دادن */
+    padding: 20px; /* فاصله داخلی */
+    background-color: white; /* پس‌زمینه سفید */
+    border-radius: 10px; /* گوشه‌های گرد */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* سایه برای عمق */
+}
+
+.profile-header {
+    text-align: right; /* تراز متن به راست */
+    margin-bottom: 20px; /* فاصله پایین */
+}
+
+.profile-buttons {
+    margin-top: 10px; /* فاصله بالای دکمه‌ها */
+}
+
+.posts-table {
+    width: 100%; /* عرض جدول */
+    border-collapse: collapse; /* حذف فاصله بین سلول‌ها */
+    text-align: center; /* مرکز قرار دادن متن جدول */
+}
+
+.posts-table th,
+.posts-table td {
+    border: 1px solid deeppink; /* مرز سلول‌ها */
+    padding: 10px; /* فاصله داخلی سلول‌ها */
+}
+
+.posts-table th {
+    background-color: #f9f5f5; /* پس‌زمینه متفاوت برای سرستون */
+}
+
+.posts-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* پس‌زمینه متفاوت برای ردیف‌های زوج */
+}
+
+.button.edit {
+    border-color: #007bff; /* رنگ مرز دکمه ویرایش */
+}
+
+.button.delete {
+    border-color: #dc3545; /* رنگ مرز دکمه حذف */
+    /*background-color: red;*/
+    /*color: white;*/
 }

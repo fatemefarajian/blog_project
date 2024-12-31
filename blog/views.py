@@ -21,9 +21,13 @@ def success_ticket(request):
     return render(request, 'blog/success_ticket.html')
 
 
-def post_list(request):
-    posts = Post.published.all()
-    paginator = Paginator(posts, 6)
+def post_list(request, category=None):
+    if category:
+        posts = Post.published.filter(category=category)
+    else:
+        posts = Post.published.all()
+
+    paginator = Paginator(posts, 3)
     page_number = request.GET.get('page', 1)
     try:
         posts = paginator.page(page_number)
@@ -31,8 +35,8 @@ def post_list(request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    posts = paginator.page(page_number)
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    # posts = paginator.page(page_number)
+    return render(request, 'blog/post_list.html', {'posts': posts, 'category': category})
 
 
 def post_detail(request, pk):
@@ -94,11 +98,11 @@ def post_search(request):
             result1 = (Post.published.annotate(
                 similarity=TrigramSimilarity('title', query) +
                            TrigramSimilarity('description', query))
-                       .filter(similarity__gt=0.1)).values('title', 'similarity')
+                       .filter(similarity__gt=0.1).values('id', 'title', 'similarity'))  # Add 'id' here.
             result2 = (Image.objects.annotate(
                 similarity=TrigramSimilarity('title', query) +
                            TrigramSimilarity('description', query))
-                       .filter(similarity__gt=0.1).values('title', 'similarity'))
+                       .filter(similarity__gt=0.1).values('id', 'title', 'similarity'))  # Add 'id' here.
 
             results = (result1.union(result2)).order_by('-similarity')
 
