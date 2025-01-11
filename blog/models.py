@@ -107,7 +107,7 @@ class Comment(models.Model):
 
 
 class Image(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='images', verbose_name='تصویر')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='images', verbose_name='پست')
     image_file = ResizedImageField(upload_to="post_images/", size=[600, 400], quality=100, crop=['middle', 'center'])
     title = models.CharField(max_length=200, verbose_name='عنوان', null=True, blank=True)
     description = models.TextField(verbose_name='توضیحات', null=True, blank=True)

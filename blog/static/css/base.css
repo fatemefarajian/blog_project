@@ -124,7 +124,7 @@ div {
 
 /* استایل برای لینک‌های دسته بندی */
 div a {
-    text-decoration: none; /* خط زیر لینک نداشته باشد */0
+    text-decoration: none; /* خط زیر لینک نداشته باشد */
     text-align: center;
     color: #007bff; /* رنگ لینک */
     padding: 6px 12px; /* فاصله داخلی */
@@ -207,9 +207,15 @@ a u {
 
 /* استایل برای دکمه "مشاهده همه" */
 .view-all a {
-    font-weight: bold; /* ضخیم‌تر کردن متن */
-    color: white; /* رنگ پررنگ */
+  text-decoration: none; /* خط زیر لینک نداشته باشد */
+    color: white; /* رنگ لینک */
+    padding: 6px 12px; /* فاصله داخلی */
+    border: 1px solid #007bff; /* مرز رنگ لینک */
+    border-radius: 5px; /* گوشه‌های گرد */
+    transition: background-color 0.3s, color 0.3s; /* انیمیشن انتقال */
+    display: inline-block; /* نمایش به صورت بلوک در خط */
 }
+
 h1{
 	width: 350px;
 	height: 70px;
