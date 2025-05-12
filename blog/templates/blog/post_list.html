@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if category %}
-<h1><a href="{% url 'blog:post_list' %}"> لیست پست‌های {{ category }}</a></h1>
+<h1><a href="{% url 'blog:post_list_category' %}"> لیست پست‌های {{ category }}</a></h1>
 {% else %}
 <div>
     <a href="{% url 'blog:post_list' %}">لیست پست‌ها</a>

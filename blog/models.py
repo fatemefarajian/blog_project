@@ -19,8 +19,6 @@ class Post(models.Model):
         PUBLISHED = 'PB', 'Published'
         REJECTED = 'RJ', 'Rejected'
 
-
-
     CATEGORY_CHOICES = (
         ('تکنولوژی', 'تکنولوی'),
         ('زبان برنامه نویسی', 'زبان برنامه نویسی'),
@@ -32,7 +30,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_posts', verbose_name='نویسنده')
     title = models.CharField(max_length=200, verbose_name='عنوان')
     description = models.TextField(verbose_name='توضیحات')
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
     # date
     publish = jmodels.jDateTimeField(default=timezone.now, verbose_name="تاریخ انتشار")
     created = jmodels.jDateTimeField(auto_now_add=True)

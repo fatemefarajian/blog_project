@@ -3,6 +3,11 @@
 {% block title %}index{% endblock %}
 {% block content %}
 <h1>my home page</h1>
+<div>
+  <a href="{% url 'blog:post_list' %}">لیست پست‌ها</a>
+
+</div>
+
 <p>تعداد پست ها: {% tp %}</p>
 <p>تعداد کامنت ها:{%  tc%}</p>
 <p>تاریخ انتشار آخرین پست : </p>

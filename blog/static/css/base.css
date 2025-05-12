@@ -8,7 +8,7 @@
     align-items: center; /* تراز کردن عمودی */
     justify-content: flex-start; /* تراز کردن همه چیز به سمت چپ */
     padding: 20px 40px; /* افزودن فاصله داخلی بیشتر */
-    background-color: #fff; /* رنگ پس‌زمینه هدر */
+    background-color: bisque; /* رنگ پس‌زمینه هدر */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* سایه برای عمق دادن به هدر */
 }
 
@@ -19,12 +19,13 @@
 
 .user-info {
     font-size: 1.2rem; /* اندازه فونت بزرگتر */
-    color: #333; /* رنگ متن */
+    color: #333333; /* رنگ متن */
     font-weight: bold; /* ضخامت متن */
+
 }
 
 .username {
-    color: #007bff; /* رنگ نام کاربر */
+    color: #333333; /* رنگ نام کاربر */
     margin-right: 15px; /* فاصله از دکمه‌ها */
     padding: 10px; /* حاشیه داخل */
     border-radius: 5px; /* گوشه‌های گرد */
@@ -38,6 +39,7 @@
 
 .header-buttons .button {
     margin-left: 10px; /* فاصله بین دکمه‌ها */
+
 }
 body {
 	--h: 212deg;
