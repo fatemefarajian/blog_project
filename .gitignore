@@ -1,15 +1,26 @@
-# محیط مجازی
-venv/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# تنظیمات PyCharm
+# C extensions
+*.so
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# IDE files
 .idea/
 
-# فایل‌های موقتی پایتون
-__pycache__/
-*.pyc
 
-# دیتابیس توسعه
-db.sqlite3
-
-# فایل‌های لاگ
+# Django stuff:
 *.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+
+# macOS
+.DS_Store
